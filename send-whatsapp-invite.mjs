@@ -3,7 +3,7 @@
  * ─────────────────────────────────────────────────────────────
  * Läuft täglich um 08:00 UTC (= 09:00 / 10:00 DE).
  * Prüft: Welche Teilnehmerinnen haben ihren ERSTEN Termin
- * eines Kurses genau in 7 Tagen? → WhatsApp-Gruppenlink per Mail.
+ * eines Kurses genau in 10 Tagen? → WhatsApp-Gruppenlink per Mail.
  * ─────────────────────────────────────────────────────────────
  * Benötigte Netlify-Umgebungsvariablen:
  *   SETMORE_API_KEY        – Setmore Refresh Token
@@ -95,10 +95,10 @@ async function sendeMail(email, vorname, kursname, whatsappLink) {
   <div class="body">
     <p>Hej ${vorname},</p>
     <p>dein Kurs startet nächste Woche – ich freue mich so sehr auf dich! 🤍</p>
-    <p>Damit du ab Tag 1 mit dabei bist: Tritt jetzt unserer WhatsApp-Gruppe bei. Dort teile ich kurzfristige Infos, Raumänderungen und kleine Erinnerungen rund um den Kurs.</p>
+    <p>Damit du ab Tag 1 mit dabei bist: Tritt jetzt unserer WhatsApp-Gruppe bei. Dort teile ich kurzfristige Infos rund um den Kurs sowie Terminabsagen falls ich aufgrund von Krankheit o.ä. die Kursstunde nicht halten kann.</p>
     <a class="btn" href="${whatsappLink}">WhatsApp-Gruppe beitreten →</a>
     <div class="note">
-      🌿 Du bekommst nach dem Beitritt eine kurze Begrüßung von mir. Bei Fragen kannst du mich jederzeit direkt anschreiben!
+      🌿 Bei Fragen kannst du mich jederzeit direkt anschreiben, der Link darf nicht geteilt werden.
     </div>
   </div>
   <div class="footer">Bauch · Baby · Beckenboden · bauch-baby-beckenboden.de</div>
@@ -116,9 +116,9 @@ export const config = {
 };
 
 export async function handler() {
-  // Zieldatum: heute + 7 Tage
+  // Zieldatum: heute + 10 Tage
   const ziel = new Date();
-  ziel.setDate(ziel.getDate() + 7);
+  ziel.setDate(ziel.getDate() + 10);
   const zielStr = ziel.toISOString().split("T")[0]; // YYYY-MM-DD
   console.log(`🔍 Suche Termine am ${zielStr}...`);
 
@@ -174,7 +174,7 @@ export async function handler() {
 
     const whatsappLink = WHATSAPP_LINKS[schluessel];
 
-    // 4. Bereits benachrichtigt? (letzte 45 Tage = eine Kursrunde)
+    // 4. Bereits benachrichtigt? (letzte 40 Tage = eine Kursrunde)
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - 45);
 
