@@ -1,0 +1,5 @@
+[build]
+  functions = "netlify/functions"
+
+[functions."send-whatsapp-invite"]
+  schedule = "0 8 * * *"
