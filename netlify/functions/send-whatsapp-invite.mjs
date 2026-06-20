@@ -131,7 +131,7 @@ export async function handler() {
 
   // 2. Setmore-Termine abrufen
   const apptRes = await fetch(
-    "https://developer.setmore.com/api/v1/bookingapi/appointments",
+    `https://developer.setmore.com/api/v1/bookingapi/appointments?startDate=${zielStr}&endDate=${zielStr}`,
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   const apptData = await apptRes.json();
