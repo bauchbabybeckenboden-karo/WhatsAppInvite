@@ -135,6 +135,7 @@ export async function handler() {
     { headers: { Authorization: `Bearer ${accessToken}` } }
   );
   const apptData = await apptRes.json();
+  console.log("📋 Setmore Rohantwort:", JSON.stringify(apptData).slice(0, 500));
   const alleTermine = apptData?.data?.appointments ?? [];
 
   // Debug: zeige erstes Appointment-Objekt damit wir Feldnamen sehen
