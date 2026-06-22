@@ -3,3 +3,5 @@
 
 [functions."send-whatsapp-invite"]
   schedule = "0 8 * * *"
+[functions."delete-old-fragebogen"]
+  schedule = "0 3 * * *"
